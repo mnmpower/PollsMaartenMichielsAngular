@@ -1,0 +1,11 @@
+<nav class="navbar nav navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">{{title}}</a>
+  <a class="navbar-brand" *ngIf="toonExtraNavOptions" href="#">Polls</a>
+  <a class="navbar-brand" *ngIf="toonExtraNavOptions" href="#">Friends</a>
+  <div class="float-right ml-auto">
+    <a class="navbar-brand" *ngIf="!toonExtraNavOptions" href="#">Sign up</a>
+    <a class="navbar-brand" *ngIf="!toonExtraNavOptions" href="#">Log in</a>
+    <a class="navbar-brand" *ngIf="toonExtraNavOptions" href="#">Log out</a>
+  </div>
+</nav>
+
