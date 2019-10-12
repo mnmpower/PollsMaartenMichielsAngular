@@ -4,20 +4,19 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './Authentication/navbar/navbar.component';
-import { WelkomComponent } from './Authentication/welkom/welkom.component';
-
+import { RouterModule } from '@angular/router';
+import { AutenticationModule } from 'src/app/Authentication/Autentication.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    WelkomComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatIconModule
+    RouterModule,
+    MatIconModule,
+    AutenticationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

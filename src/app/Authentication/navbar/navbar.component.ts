@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   title = 'EZ-Poll';
-  toonExtraNavOptions: boolean = false;
+  toonExtraNavOptions = false;
   constructor() { }
 
   ngOnInit() {
