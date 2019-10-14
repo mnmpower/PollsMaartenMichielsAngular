@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top ">
 
-  <a class="navbar-brand" routerLink="/"  routerLinkActive="active"
+  <a class="navbar-brand" routerLink="/" routerLinkActive="active"
      [routerLinkActiveOptions]="{ exact: true }">{{title}}</a>
 
-  <a class="navbar-brand" routerLink="/polls"  routerLinkActive="active"
+  <a class="navbar-brand" routerLink="/polls" routerLinkActive="active"
      *ngIf="toonExtraNavOptions"
      [routerLinkActiveOptions]="{ exact: true }">Polls</a>
 
@@ -25,4 +25,6 @@
        [routerLinkActiveOptions]="{ exact: true }">Log out</a>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<div class="container pt-3">
+  <router-outlet></router-outlet>
+</div>
