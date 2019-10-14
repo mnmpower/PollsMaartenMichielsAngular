@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NavbarComponent } from 'src/app/Authentication/navbar/navbar.component';
 import { WelkomComponent } from './welkom/welkom.component';
-import { AppRoutingModule } from '../app-routing.module';
-import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
+import { SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -16,9 +14,7 @@ import { SignupComponent } from './signup/signup.component';
     LoginComponent,
     SignupComponent],
   imports: [
-    CommonModule,
-    AppRoutingModule,
-    RouterModule
+    SharedModule
   ],
   exports: [
     NavbarComponent,

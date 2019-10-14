@@ -1,1 +1,47 @@
-<p>signup works!</p>
+<h1>Sign up</h1>
+<form [formGroup]="SingUpForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+
+    <label for="inputNaam" class="pt-3">Last name</label>
+    <input type="text" class="form-control" id="inputNaam" placeholder="Last name" formControlName="inputNaam">
+
+    <label for="inputVoornaam" class="pt-3">First name</label>
+    <input type="text" class="form-control" id="inputVoornaam" placeholder="First name" formControlName="inputVoornaam">
+
+    <label for="inputGebruikersnaam" class="pt-3">Username</label>
+
+    <div class="input-group ">
+      <input type="text" class="form-control" id="inputGebruikersnaam" placeholder="Username"
+             formControlName="inputGebruikersnaam">
+
+      <div class="input-group-append">
+        <button type="button" class="btn btn-secondary input-group-text">Check</button>
+      </div>
+    </div>
+    <small class="form-text text-muted pb-2">Check if your username is free.</small>
+
+
+    <label for="inputEmailSignUp" class="pt-3">Email address</label>
+    <input type="email" class="form-control" id="inputEmailSignUp" placeholder="Enter email"
+           formControlName="inputEmailSignUp">
+    <small class="form-text text-muted pb-2">We'll never share your email with anyone else.</small>
+
+    <label for="inputEmailConfirm">Confirm Email address</label>
+    <input type="email" class="form-control pb-2" id="inputEmailConfirm" placeholder="Email"
+           formControlName="inputEmailConfirm">
+
+    <label for="inputPasswordSignUp" class="pt-3">Password</label>
+    <input type="password" class="form-control " id="inputPasswordSignUp" placeholder="Password"
+           formControlName="inputPasswordSignUp">
+    <small class="form-text text-muted pb-2">We'll never share your password with anyone else.</small>
+
+    <label for="inputPasswordConfirmation">Confirm your password</label>
+    <input type="password" class="form-control" id="inputPasswordConfirmation" placeholder="Password confirmation"
+           formControlName="inputPasswordConfirmation">
+  </div>
+  <div class="form-check pb-4">
+    <input type="checkbox" class="form-check-input" id="checkboxForMails">
+    <label class="form-check-label" for="checkboxForMails">Don't send me emails</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>

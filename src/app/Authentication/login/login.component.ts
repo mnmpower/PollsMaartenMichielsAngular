@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   }
 
   loginForm = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', [Validators.required, Validators.minLength(2)]]
+    loginEmail: ['', Validators.required],
+    LoginPassword: ['', [Validators.required, Validators.minLength(2)]]
   });
 
 
@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log(this.submitted);
+    console.log(this.loginForm.getRawValue());
     // console.log(this.loginForm.value);
     // this._authenticateService.authenticate(this.loginForm.value).subscribe(result => {
     //   localStorage.setItem("token", result.token);
