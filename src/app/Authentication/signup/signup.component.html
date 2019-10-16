@@ -1,47 +1,104 @@
 <h1>Sign up</h1>
-<form [formGroup]="SingUpForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="SingUpForm" (ngSubmit)="onSubmit()" data-toggle="validator">
+
+  <!-- LAST NAME INPUT FORM CONTROL -->
   <div class="form-group">
-
     <label for="inputNaam" class="pt-3">Last name</label>
-    <input type="text" class="form-control" id="inputNaam" placeholder="Last name" formControlName="inputNaam">
+    <input type="text" class="form-control" id="inputNaam" placeholder="Last name"
+           formControlName="inputNaam" [ngClass]="{ 'is-invalid': submitted && f.inputNaam.errors }">
+    <div *ngIf="submitted && f.inputNaam.errors" class="invalid-feedback">
+      <div *ngIf="f.inputNaam.errors.required">Last name is required, please fill in your Last name!</div>
+    </div>
+  </div>
 
-    <label for="inputVoornaam" class="pt-3">First name</label>
-    <input type="text" class="form-control" id="inputVoornaam" placeholder="First name" formControlName="inputVoornaam">
 
-    <label for="inputGebruikersnaam" class="pt-3">Username</label>
+  <!-- FIRST NAME INPUT FORM CONTROL -->
+  <div class="form-group">
+    <label for="inputVoornaam" class="">First name</label>
+    <input type="text" class="form-control" id="inputVoornaam" placeholder="First name"
+           formControlName="inputVoornaam" [ngClass]="{ 'is-invalid': submitted && f.inputVoornaam.errors }">
+    <div *ngIf="submitted && f.inputVoornaam.errors" class="invalid-feedback">
+      <div *ngIf="f.inputVoornaam.errors.required">First name is required, please fill in your first name!</div>
+    </div>
+  </div>
 
+
+  <!-- USERNAME INPUT FORM CONTROL -->
+  <div class="form-group">
+    <label for="inputGebruikersnaam" class="">Username</label>
     <div class="input-group ">
       <input type="text" class="form-control" id="inputGebruikersnaam" placeholder="Username"
-             formControlName="inputGebruikersnaam">
-
+             formControlName="inputGebruikersnaam" [ngClass]="{ 'is-invalid': submitted && f.inputGebruikersnaam.errors }">
       <div class="input-group-append">
-        <button type="button" class="btn btn-secondary input-group-text">Check</button>
+        <!-- CHECK BUTTON USERNAME -->
+        <button type="button" class="btn btn-secondary input-group-text" (click)="checkUsername()">Check</button>
+      </div>
+      <div *ngIf="submitted && f.inputGebruikersnaam.errors" class="invalid-feedback">
+        <div *ngIf="f.inputGebruikersnaam.errors.required">Username is required, please fill in a username!</div>
+        <div *ngIf="f.inputGebruikersnaam.errors.minlength">Username must be at least 5 characters!</div>
+        <div *ngIf="f.inputGebruikersnaam.errors.inUse">Username is already in use!</div>
       </div>
     </div>
     <small class="form-text text-muted pb-2">Check if your username is free.</small>
+  </div>
 
 
-    <label for="inputEmailSignUp" class="pt-3">Email address</label>
+  <!-- EMAIL INPUT FORM CONTROL -->
+  <div class="form-group">
+    <label for="inputEmailSignUp" class="">Email address</label>
     <input type="email" class="form-control" id="inputEmailSignUp" placeholder="Enter email"
-           formControlName="inputEmailSignUp">
-    <small class="form-text text-muted pb-2">We'll never share your email with anyone else.</small>
+           formControlName="inputEmailSignUp" [ngClass]="{ 'is-invalid': submitted && f.inputEmailSignUp.errors }">
+    <div *ngIf="submitted && f.inputEmailSignUp.errors" class="invalid-feedback">
+      <div *ngIf="f.inputEmailSignUp.errors.required">Email is required, please fill in a email address!</div>
+      <div *ngIf="f.inputEmailSignUp.errors.email">Email must be a valid email address!</div>
+    </div>
+  </div>
 
+
+  <!-- CONFIRM EMAIL INPUT FORM CONTROL -->
+  <div class="form-group">
     <label for="inputEmailConfirm">Confirm Email address</label>
-    <input type="email" class="form-control pb-2" id="inputEmailConfirm" placeholder="Email"
-           formControlName="inputEmailConfirm">
+    <input type="email" class="form-control " id="inputEmailConfirm" placeholder="Email"
+           formControlName="inputEmailConfirm" [ngClass]="{ 'is-invalid': submitted && f.inputEmailConfirm.errors }">
+    <div *ngIf="submitted && f.inputEmailConfirm.errors" class="invalid-feedback">
+      <div *ngIf="f.inputEmailConfirm.errors.required">Confirmation of you email is required!</div>
+      <div *ngIf="f.inputEmailConfirm.errors.mustMatch">Email must match!</div>
+    </div>
+    <small class="form-text text-muted pb-2">We'll never share your email with anyone else.</small>
+  </div>
 
-    <label for="inputPasswordSignUp" class="pt-3">Password</label>
+
+  <!-- PASSWORD INPUT FORM CONTROL -->
+  <div class="form-group">
+    <label for="inputPasswordSignUp" class="">Password</label>
     <input type="password" class="form-control " id="inputPasswordSignUp" placeholder="Password"
-           formControlName="inputPasswordSignUp">
-    <small class="form-text text-muted pb-2">We'll never share your password with anyone else.</small>
+           formControlName="inputPasswordSignUp" [ngClass]="{ 'is-invalid': submitted && f.inputPasswordSignUp.errors }">
+    <div *ngIf="submitted && f.inputPasswordSignUp.errors" class="invalid-feedback">
+      <div *ngIf="f.inputPasswordSignUp.errors.required">Password is required, please fill in a password!</div>
+      <div *ngIf="f.inputPasswordSignUp.errors.minlength">Username must be at least 8 characters!</div>
+    </div>
+  </div>
 
-    <label for="inputPasswordConfirmation">Confirm your password</label>
-    <input type="password" class="form-control" id="inputPasswordConfirmation" placeholder="Password confirmation"
-           formControlName="inputPasswordConfirmation">
+
+  <!-- CONFIRM PASSWORD INPUT FORM CONTROL -->
+  <div class="form-group">
+    <label for="inputPasswordConfirm">Confirm your password</label>
+    <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Password confirmation"
+           formControlName="inputPasswordConfirm" [ngClass]="{ 'is-invalid': submitted && f.inputPasswordConfirm.errors }">
+    <div *ngIf="submitted && f.inputPasswordConfirm.errors" class="invalid-feedback">
+      <div *ngIf="f.inputPasswordConfirm.errors.required">Confirmation of your password is required!</div>
+      <div *ngIf="f.inputPasswordConfirm.errors.mustMatch">Passwords must match!</div>
+    </div>
+    <small class="form-text text-muted pb-2">We'll never share your password with anyone else.</small>
   </div>
-  <div class="form-check pb-4">
-    <input type="checkbox" class="form-check-input" id="checkboxForMails">
-    <label class="form-check-label" for="checkboxForMails">Don't send me emails</label>
+
+
+
+  <div class="form-group">
+    <div class="form-check pb-3">
+      <input type="checkbox" class="form-check-input" id="checkboxForMails">
+      <label class="form-check-label" for="checkboxForMails">Don't send me emails</label>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Register</button>
+  <button type="submit" [disabled]="!checkedValidUsername" class="btn btn-primary">Register</button>
 </form>
