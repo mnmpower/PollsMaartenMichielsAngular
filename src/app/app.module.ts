@@ -1,9 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { AutenticationModule } from 'src/app/Authentication/Autentication.module';
-import {HttpClientModule} from '@angular/common/http';
-import { SharedModule} from './Shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './Shared/shared.module';
 import { NgModule } from '@angular/core';
+
+
+import {Gebruiker} from './Models/gebruiker.model';
+import {GebruikerService} from './Services/gebruiker.service';
+import {AuthenticationService} from './Services/authentication.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,14 +39,17 @@ const appRoutes: Routes = [
     AutenticationModule,
     SharedModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: true})
+    RouterModule.forRoot(appRoutes, {enableTracing: false})
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: SecurityInterceptor,
-    multi: true
+    multi: true,
   },
-    NeedAuthGuard
+    NeedAuthGuard,
+    Gebruiker,
+    GebruikerService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from 'src/app/Services/authentication.service';
+import {GebruikerService} from '../../Services/gebruiker.service';
 
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MustMatch} from '../helpers/must-match.validator';
+import {Gebruiker} from '../../Models/gebruiker.model';
 
 @Component({
   selector: 'app-signup',
@@ -12,27 +14,24 @@ import {MustMatch} from '../helpers/must-match.validator';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private router: Router, private _authenticationService: AuthenticationService) {
+
+  constructor(private fb: FormBuilder, private router: Router, private _authenticationService: AuthenticationService,
+              private _gebruikerService: GebruikerService) {
   }
 
   submitted = false;
   checkedValidUsername = false;
   inUse = false;
-  SingUpForm: FormGroup;
+  SignUpForm: FormGroup;
+  gebruiker: Gebruiker = new Gebruiker(0, '', '', '', '', '', '');
 
   // convenience getter for easy access to form fields
   get f() {
-    return this.SingUpForm.controls;
+    return this.SignUpForm.controls;
   }
 
-  //
-  // checkAllValidations(){
-  //   MustMatch('inputPasswordSignUp', 'inputPasswordConfirm');
-  //   MustMatch('inputEmailSignUp', 'inputEmailConfirm');
-  // }
-
   ngOnInit() {
-    this.SingUpForm = this.fb.group({
+    this.SignUpForm = this.fb.group({
       inputNaam: ['', Validators.required],
       inputVoornaam: ['', Validators.required],
       inputGebruikersnaam: ['', [Validators.required, Validators.minLength(5)]],
@@ -56,30 +55,35 @@ export class SignupComponent implements OnInit {
     this.checkedValidUsername = true;
     // }
     // return true;
-    this.SingUpForm.controls['inputGebruikersnaam'].setErrors({'inUse': true});
-    this.SingUpForm.markAsDirty();
-    this.inUse = true;
+    this.inUse = !this.inUse;
   }
 
   onSubmit() {
     this.submitted = true;
 
-    if (this.SingUpForm.invalid) {
+    if (this.SignUpForm.invalid) {
       return;
     }
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.SingUpForm.value));
-    //
-    //
-    // console.log(this.SingUpForm.getRawValue());
-    // // Hier validation toevoegen in de opgenomen waardes
-    // console.log(this.SingUpForm.get('inputPasswordSignUp').value);
-    // console.log(this.SingUpForm.get('inputPasswordConfirm').value);
 
-    this._authenticationService.authenticate(this.SingUpForm.value).subscribe(result => {
-      localStorage.setItem('token', result.token);
-      this._authenticationService.isLoggedin.next(result.token ? true : false);
+    this.gebruiker.Naam = this.SignUpForm.get(['inputNaam']).value;
+    this.gebruiker.Voornaam = this.SignUpForm.get(['inputVoornaam']).value;
+    this.gebruiker.Gebruikersnaam = this.SignUpForm.get(['inputGebruikersnaam']).value;
+    this.gebruiker.Email = this.SignUpForm.get(['inputEmailSignUp']).value;
+    this.gebruiker.Wachtwoord = this.SignUpForm.get(['inputPasswordSignUp']).value;
 
-      this.router.navigate([''], {replaceUrl: true});
+    console.log(this.gebruiker);
+
+
+    this._gebruikerService.registreer(this.gebruiker).subscribe(result =>{
+      console.log(result);
     });
+
+
+    // this._authenticationService.authenticate(this.SingUpForm.value).subscribe(result => {
+    //   localStorage.setItem('token', result.token);
+    //   this._authenticationService.isLoggedin.next(result.token ? true : false);
+
+    this.router.navigate(['logIn'], {replaceUrl: true});
+    // });
   }
 }

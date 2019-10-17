@@ -16,7 +16,6 @@ export class AuthenticationService {
   }
 
   authenticate(login: Login): Observable<Gebruiker> {
-    console.log(login);
     return this._httpClient.post<Gebruiker>('https://localhost:44364/api/Gebruiker/authenticate', login);
 
   }

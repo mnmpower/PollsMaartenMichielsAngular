@@ -12,7 +12,7 @@ export class GebruikerService {
     return this.http.get<Gebruiker[]>('https://localhost:44364/api/Gebruiker');
   }
 
-  addGebruiker(gebruiker: Gebruiker) {
+  registreer(gebruiker: Gebruiker) {
     return this.http.post<Gebruiker>('https://localhost:44364/api/Gebruiker', gebruiker);
   }
 

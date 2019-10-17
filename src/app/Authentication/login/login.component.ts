@@ -29,18 +29,10 @@ export class LoginComponent implements OnInit {
     console.log(this.submitted);
     console.log(this.loginForm.getRawValue());
 
-    // DEZE REDIRECT WERKT
-    // this.router.navigate(['../signUp'], { replaceUrl: true });
-
-
     this._authenticationService.authenticate(this.loginForm.value).subscribe(result => {
-      console.log(this.loginForm.value);
-      console.log(result);
       localStorage.setItem('token', result.token);
 
       this._authenticationService.isLoggedin.next(result.token ? true : false);
-
-
       this.router.navigate(['../signUp'], {replaceUrl: true});
     });
 

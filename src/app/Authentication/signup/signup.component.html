@@ -1,5 +1,5 @@
 <h1>Sign up</h1>
-<form [formGroup]="SingUpForm" (ngSubmit)="onSubmit()" data-toggle="validator">
+<form [formGroup]="SignUpForm" (ngSubmit)="onSubmit()" data-toggle="validator">
 
   <!-- LAST NAME INPUT FORM CONTROL -->
   <div class="form-group">
@@ -33,7 +33,7 @@
         <!-- CHECK BUTTON USERNAME -->
         <button type="button" class="btn btn-secondary input-group-text" (click)="checkUsername()">Check</button>
       </div>
-      <div *ngIf="inUse" class="invalid-feedback">
+      <div *ngIf="inUse" class="invalid-feedback d-block">
         <div >Username is already in use!</div>
       </div>
       <div *ngIf="submitted && f.inputGebruikersnaam.errors" class="invalid-feedback">
