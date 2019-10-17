@@ -4,25 +4,25 @@
      [routerLinkActiveOptions]="{ exact: true }">{{title}}</a>
 
   <a class="navbar-brand" routerLink="/polls" routerLinkActive="active"
-     *ngIf="toonExtraNavOptions"
+     *ngIf="isLoggedIn"
      [routerLinkActiveOptions]="{ exact: true }">Polls</a>
 
   <a class="navbar-brand" routerLink="/friends" routerLinkActive="active"
-     *ngIf="toonExtraNavOptions"
+     *ngIf="isLoggedIn"
      [routerLinkActiveOptions]="{ exact: true }">Friends</a>
 
   <div class="float-right ml-auto">
     <a class="navbar-brand" routerLink="/signUp" routerLinkActive="active"
-       *ngIf="!toonExtraNavOptions"
+       *ngIf="!isLoggedIn"
        [routerLinkActiveOptions]="{ exact: true }">Sign up</a>
 
     <a class="navbar-brand" routerLink="/logIn" routerLinkActive="active"
-       *ngIf="!toonExtraNavOptions"
+       *ngIf="!isLoggedIn"
        [routerLinkActiveOptions]="{ exact: true }">Log in</a>
 
     <a class="navbar-brand" routerLink="/Welkom" routerLinkActive="active"
-       *ngIf="toonExtraNavOptions"
-       [routerLinkActiveOptions]="{ exact: true }">Log out</a>
+       *ngIf="isLoggedIn"
+       [routerLinkActiveOptions]="{ exact: true }" (click)="logUit()">Log out</a>
   </div>
 </nav>
 <div class="container pt-3">
