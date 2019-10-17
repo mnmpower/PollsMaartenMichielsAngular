@@ -3,13 +3,23 @@
   <a class="navbar-brand" routerLink="/" routerLinkActive="active"
      [routerLinkActiveOptions]="{ exact: true }">{{title}}</a>
 
+  <a class="navbar-brand" routerLink="/dashboard" routerLinkActive="active"
+     *ngIf="isLoggedIn"
+     [routerLinkActiveOptions]="{ exact: true }"><i class="material-icons md-34 md-light">
+    account_circle
+  </i></a>
+
   <a class="navbar-brand" routerLink="/polls" routerLinkActive="active"
      *ngIf="isLoggedIn"
-     [routerLinkActiveOptions]="{ exact: true }">Polls</a>
+     [routerLinkActiveOptions]="{ exact: true }"><i class="material-icons md-34 md-light">
+    poll
+  </i></a>
 
   <a class="navbar-brand" routerLink="/friends" routerLinkActive="active"
      *ngIf="isLoggedIn"
-     [routerLinkActiveOptions]="{ exact: true }">Friends</a>
+     [routerLinkActiveOptions]="{ exact: true }"><i class="material-icons md-34 md-light">
+    person_outline
+  </i></a>
 
   <div class="float-right ml-auto">
     <a class="navbar-brand" routerLink="/signUp" routerLinkActive="active"

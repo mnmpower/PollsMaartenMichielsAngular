@@ -11,16 +11,16 @@ import {Router} from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   title = 'EZ-Poll';
-  isLoggedIn = false;
+  isLoggedIn = true;
 
   constructor(private router: Router, private _authenticationService: AuthenticationService) {
-    this._authenticationService.isLoggedin.subscribe(e => {
-      if (this._authenticationService.isLoggedin.value == true) {
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-      }
-    });
+    // this._authenticationService.isLoggedin.subscribe(e => {
+    //   if (this._authenticationService.isLoggedin.value == true) {
+    //     this.isLoggedIn = true;
+    //   } else {
+    //     this.isLoggedIn = false;
+    //   }
+    // });
   }
 
   ngOnInit() {

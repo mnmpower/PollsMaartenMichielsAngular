@@ -19,6 +19,10 @@ import {SecurityInterceptor} from 'src/app/Authentication/helpers/security.inter
 import {WelkomComponent} from './Authentication/welkom/welkom.component';
 import {SignupComponent} from './Authentication/signup/signup.component';
 import {LoginComponent} from './Authentication/login/login.component';
+import { DashboardComponent } from './User/dashboard/dashboard.component';
+import { PollComponent } from './User/poll/poll.component';
+import { FriendComponent } from './User/friend/friend.component';
+import { SettingsComponent } from './User/settings/settings.component';
 
 const appRoutes: Routes = [
   { path: '', component: WelkomComponent },
@@ -29,7 +33,11 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    PollComponent,
+    FriendComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
