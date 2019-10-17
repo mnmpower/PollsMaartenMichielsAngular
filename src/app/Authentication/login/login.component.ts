@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-// import { AuthenticateService } from 'src/app/Services/authenticate.service';
+import {AuthenticationService} from '../../Services/authentication.service';
 
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -12,12 +12,12 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   submitted: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private _authenticationService: AuthenticationService) {
   }
 
   loginForm = this.fb.group({
-    loginEmail: ['', Validators.required],
-    LoginPassword: ['', [Validators.required, Validators.minLength(2)]]
+    Email: ['', Validators.required],
+    Wachtwoord: ['', Validators.required]
   });
 
 
@@ -28,12 +28,22 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     console.log(this.submitted);
     console.log(this.loginForm.getRawValue());
-    // console.log(this.loginForm.value);
-    // this._authenticateService.authenticate(this.loginForm.value).subscribe(result => {
-    //   localStorage.setItem("token", result.token);
-    //   this._authenticateService.isLoggedin.next(result.token ? true : false);
-    //
-    //   this.router.navigate(['../home'], { replaceUrl: true });
-    // });
+
+    // DEZE REDIRECT WERKT
+    // this.router.navigate(['../signUp'], { replaceUrl: true });
+
+
+    this._authenticationService.authenticate(this.loginForm.value).subscribe(result => {
+      console.log(this.loginForm.value);
+      console.log(result);
+      localStorage.setItem('token', result.token);
+
+      this._authenticationService.isLoggedin.next(result.token ? true : false);
+
+
+      this.router.navigate(['../signUp'], {replaceUrl: true});
+    });
+
+    console.log('INLOGGEN MISLUKT');
   }
 }

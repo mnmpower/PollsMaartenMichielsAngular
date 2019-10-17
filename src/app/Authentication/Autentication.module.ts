@@ -4,7 +4,7 @@ import { WelkomComponent } from './welkom/welkom.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
-import { SharedModule} from '../shared/shared.module';
+import { SharedModule} from '../Shared/shared.module';
 
 
 @NgModule({
