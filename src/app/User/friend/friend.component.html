@@ -1,1 +1,60 @@
-<p>friend works!</p>
+<h1>Friends</h1>
+
+<!-- SEARCH FORM ADDING FRIENDS -->
+<form [formGroup]="SearchFriendsForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="inputSearchFriend" class="">Search new friends</label>
+    <div class="input-group ">
+      <input type="text" class="form-control" id="inputSearchFriend" placeholder="Username"
+             formControlName="inputSearchFriend">
+      <div class="input-group-append">
+        <!-- SEARCH BUTTON USERNAME -->
+        <button type="submit" class="btn btn-secondary input-group-text"><i class="material-icons md-dark md-24">
+          search
+        </i></button>
+
+      </div>
+    </div>
+    <small class="form-text text-muted pb-2">Type the username of your friend.</small>
+  </div>
+</form>
+
+<!-- LISTS INCOMIG_FRENDS REQUESTS -->
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+    <h3>Incoming</h3>
+    <div *ngFor="let request of (IncomingRequests | async)">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- LISTS OUTGOOING FRENDS REQUESTS -->
+  <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+    <h3>Send</h3>
+    <div *ngFor="let m of (OutgoingRequests | async)">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

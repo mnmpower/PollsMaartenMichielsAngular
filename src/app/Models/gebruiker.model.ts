@@ -1,5 +1,6 @@
 export class Gebruiker {
   token: string;
+  gebruikerID: number;
 
   constructor(
     public GebruikerID: number,

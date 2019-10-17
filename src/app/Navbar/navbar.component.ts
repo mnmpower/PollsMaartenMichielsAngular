@@ -11,16 +11,16 @@ import {Router} from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   title = 'EZ-Poll';
-  isLoggedIn = true;
+  isLoggedIn = false;
 
   constructor(private router: Router, private _authenticationService: AuthenticationService) {
-    // this._authenticationService.isLoggedin.subscribe(e => {
-    //   if (this._authenticationService.isLoggedin.value == true) {
-    //     this.isLoggedIn = true;
-    //   } else {
-    //     this.isLoggedIn = false;
-    //   }
-    // });
+    this._authenticationService.isLoggedin.subscribe(e => {
+      if (this._authenticationService.isLoggedin.value == true) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    });
   }
 
   ngOnInit() {
@@ -28,9 +28,10 @@ export class NavbarComponent implements OnInit {
 
   logUit() {
     localStorage.removeItem('token');
+    sessionStorage.clear();
     // this.isLoggedIn = false;
     this._authenticationService.isLoggedin.next(false);
-    this.router.navigate([''], {replaceUrl: true});
+    this.router.navigate(['logIn'], {replaceUrl: true});
   }
 
 

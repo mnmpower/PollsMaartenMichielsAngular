@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../Services/authentication.service';
+import {Router} from '@angular/router';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-welkom',
@@ -11,7 +13,7 @@ export class WelkomComponent implements OnInit {
   auteur = 'Maarten Michiels';
   isLoggedIn: boolean = false;
 
-  constructor(private _authenticationService: AuthenticationService) {
+  constructor(private _authenticationService: AuthenticationService, private router: Router) {
 
     this._authenticationService.isLoggedin.subscribe(e => {
       if (this._authenticationService.isLoggedin.value == true) {
@@ -23,4 +25,7 @@ export class WelkomComponent implements OnInit {
   ngOnInit() {
   }
 
+  naarDashboard() {
+    this.router.navigate(['friends'], {replaceUrl: true});
+  }
 }

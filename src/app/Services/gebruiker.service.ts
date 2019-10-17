@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 
 @Injectable()
 export class GebruikerService {
+
   constructor(private http: HttpClient) {
   }
 
