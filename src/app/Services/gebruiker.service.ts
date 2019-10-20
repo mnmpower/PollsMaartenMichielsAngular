@@ -9,6 +9,9 @@ export class GebruikerService {
   constructor(private http: HttpClient) {
   }
 
+  zoekGebruikers(zoekstring: string, gebruikerID: number): Observable<Gebruiker[]> {
+    return this.http.get<Gebruiker[]>('https://localhost:44364/api/Gebruiker/ZoekGebruikers/' + zoekstring + '?zoekerID=' + gebruikerID);
+  }
   getGebruikers(): Observable<Gebruiker[]> {
     return this.http.get<Gebruiker[]>('https://localhost:44364/api/Gebruiker');
   }

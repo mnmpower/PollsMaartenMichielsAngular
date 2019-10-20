@@ -1,9 +1,20 @@
+import {Gebruiker} from './gebruiker.model';
+
 export class Vriend {
+  vriendID: number;
+  verzenderID: number;
+  ontvangerID: number;
+  bevestigd: boolean;
+  ontvanger: Gebruiker;
+  verzender: Gebruiker;
+
   constructor(
     public VriendID: number,
-    public VerzenderID: string,
-    public OntvangerID: string,
-    public Bevestigd: boolean
+    public VerzenderID: number,
+    public OntvangerID: number,
+    public Bevestigd: boolean,
+    public Ontvanger?: Gebruiker,
+    public Verzender?: Gebruiker
   ) {
   }
 }

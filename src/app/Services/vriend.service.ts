@@ -5,11 +5,16 @@ import {Observable} from 'rxjs';
 
 @Injectable()
 export class VriendService {
+
   constructor(private http: HttpClient) {
   }
 
-  getAllVrienden(): Observable<Vriend[]> {
-    return this.http.get<Vriend[]>('https://localhost:44364/api/Vriend');
+  checkCombo(id: number, id2: number) {
+    return this.http.get<boolean>('https://localhost:44364/api/Vriend/CheckCombo/' + id + '?id2=' + id2);
+  }
+
+  getAllVrienden(GebruikerID: number): Observable<Vriend[]> {
+    return this.http.get<Vriend[]>('https://localhost:44364/api/Vriend/GetAllVrienden/' + GebruikerID);
   }
 
   getIncomingVriendRequests(GebruikerID: number): Observable<Vriend[]> {
@@ -17,7 +22,16 @@ export class VriendService {
   }
 
   getOutgoingVriendRequests(GebruikerID: number): Observable<Vriend[]> {
+
     return this.http.get<Vriend[]>('https://localhost:44364/api/Vriend/GetVriendschapsverzoekUit/' + GebruikerID);
+  }
+
+  getVriend(): Observable<Vriend[]> {
+    return this.http.get<Vriend[]>('https://localhost:44364/api/Vriend');
+  }
+
+  getVriendByVriendID(VriendID: number) {
+    return this.http.get<Vriend>('https://localhost:44364/api/Vriend/' + VriendID);
   }
 
   AddVriend(vriend: Vriend) {
@@ -29,6 +43,9 @@ export class VriendService {
   }
 
   deleteVriend(vriendID: number) {
+    console.log('IN SERVICE');
+    console.log(vriendID);
+    console.log(this.http.delete<Vriend>('https://localhost:44364/api/Vriend/' + vriendID));
     return this.http.delete<Vriend>('https://localhost:44364/api/Vriend/' + vriendID);
   }
 }

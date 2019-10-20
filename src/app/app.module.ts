@@ -25,6 +25,7 @@ import {DashboardComponent} from './User/dashboard/dashboard.component';
 import {PollComponent} from './User/poll/poll.component';
 import {FriendComponent} from './User/friend/friend.component';
 import {SettingsComponent} from './User/settings/settings.component';
+import {VriendService} from './Services/vriend.service';
 
 const appRoutes: Routes = [
   {path: '', component: WelkomComponent},
@@ -60,6 +61,8 @@ const appRoutes: Routes = [
     NeedAuthGuard,
     Gebruiker,
     Vriend,
+    VriendService,
+    GebruikerService,
     AuthenticationService
   ],
   bootstrap: [AppComponent]

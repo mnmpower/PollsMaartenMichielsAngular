@@ -5,7 +5,7 @@
   <div class="form-group">
     <label for="inputSearchFriend" class="">Search new friends</label>
     <div class="input-group ">
-      <input type="text" class="form-control" id="inputSearchFriend" placeholder="Username"
+      <input type="text" class="form-control" id="inputSearchFriend" placeholder="Username" (change)="onSubmit()"
              formControlName="inputSearchFriend">
       <div class="input-group-append">
         <!-- SEARCH BUTTON USERNAME -->
@@ -19,42 +19,142 @@
   </div>
 </form>
 
-<!-- LISTS INCOMIG_FRENDS REQUESTS -->
-<div class="row">
-  <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-    <h3>Incoming</h3>
-    <div *ngFor="let request of (IncomingRequests | async)">
-      <div class="row">
-        <div class="col-md-6 col-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
+
+<!-- LISTS ADD FRENDSS -->
+
+<div class="row" *ngIf="Zoekstring != ''">
+  <div class="col-3"></div>
+  <div class="list-group  text-center col-6 ">
+    <div class="list-group-item list-group-item-action" *ngFor="let gebruiker of (AddFriendList | async)" (click)="addVriend(gebruiker.gebruikerID)">
+      <span class="float-left" ><i class="material-icons">
+        person_add
+      </i></span>
+      <span>{{gebruiker.gebruikersnaam}}</span>
+
     </div>
 
-  </div>
-  <!-- LISTS OUTGOOING FRENDS REQUESTS -->
-  <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-    <h3>Send</h3>
-    <div *ngFor="let m of (OutgoingRequests | async)">
-      <div class="row">
-        <div class="col-md-6 col-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
   </div>
 </div>
+
+
+<!-- LISTS INCOMIG_FRENDS REQUESTS -->
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
+       *ngIf="(IncomingRequests | async)?.length != 0">
+    <h3>Incoming</h3>
+    <div class="row">
+      <div *ngFor="let ontvanger of (IncomingRequests | async)" class="col col-md-6 col-12 mb-3 mt-3">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ontvanger.verzender.gebruikersnaam}}</h5>
+                <p class="card-text">Friend request send from
+                  "{{ontvanger.verzender.voornaam}} {{ontvanger.verzender.naam}}". Waiting to be answered.</p>
+                <button class="btn btn-primary m-1 buttonAccepDecline"
+                        (click)="AcceptIncomingRequest(ontvanger.vriendID)">
+                  <i class="material-icons md-light md-20 pb-0-5">
+                    check
+                  </i>
+
+                </button>
+                <button class="btn btn-secondary m-1 buttonAccepDecline" (click)="deleteFriend(ontvanger.vriendID)">
+                  <i class="material-icons md-light md-20 pb-0-5">
+                    cancel
+                  </i>
+
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LISTS OUTGOOING FRENDS REQUESTS -->
+  <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" *ngIf="(OutgoingRequests | async)?.length != 0">
+    <h3>Outgoing</h3>
+    <div class="row">
+      <div *ngFor="let ontvanger of (OutgoingRequests | async)"
+           class="col col-12 col-md-6 mb-3 mt-3 col-lg-6 col-xl-6">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ontvanger.ontvanger.gebruikersnaam}}</h5>
+                <p class="card-text">Friend request send to
+                  "{{ontvanger.ontvanger.voornaam}} {{ontvanger.ontvanger.naam}}". Waiting on a responds.</p>
+                <button class="btn btn-primary" (click)="deleteFriend(ontvanger.vriendID)">
+                  <i class="material-icons md-light md-20 pb-0-5">
+                    cancel
+                  </i>
+                  Abort request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- HIER WORDEN ALL VRIENDEN GETOOND IN KAARTJES -->
+<div class="row">
+  <h3 class="col-12">All friends</h3>
+  <div *ngFor="let v of (AllFriends | async)"
+       class="col col-md-6 col-12 mb-3 mt-3 col-lg-6 col-xl-6">
+    <div *ngIf="v.verzender.gebruikerID == GebruikerID">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{v.ontvanger.gebruikersnaam}}</h5>
+              <p class="card-text">
+                First name: {{v.ontvanger.voornaam}}
+                <br/>
+                Last name: {{v.ontvanger.naam}}
+                <br/>
+              </p>
+              <button class="btn btn-secondary" (click)="deleteFriend(v.vriendID)">
+                <i class="material-icons md-light md-20 pb-0-5">
+                  cancel
+                </i>
+                Delete friend
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="v.ontvanger.gebruikerID == GebruikerID">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{v.verzender.gebruikersnaam}}</h5>
+              <p class="card-text">
+                First name: {{v.verzender.voornaam}}
+                <br/>
+                Last name: {{v.verzender.naam}}
+                <br/>
+              </p>
+              <button class="btn btn-secondary" (click)="deleteFriend(v.vriendID)">
+                <i class="material-icons md-light md-20 pb-0-5">
+                  cancel
+                </i>
+                Delete friend
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
