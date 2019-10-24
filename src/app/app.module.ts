@@ -28,6 +28,8 @@ import {SettingsComponent} from './User/settings/settings.component';
 import {VriendService} from './Services/vriend.service';
 import {PollService} from './Services/poll.service';
 import {StemService} from './Services/stem.service';
+import {PollgebruikerService} from './Services/pollgebruiker.service';
+import {PollcreateService} from './Services/pollcreate.service';
 
 
 const appRoutes: Routes = [
@@ -68,7 +70,9 @@ const appRoutes: Routes = [
     GebruikerService,
     PollService,
     StemService,
-    AuthenticationService
+    AuthenticationService,
+    PollgebruikerService,
+    PollcreateService
   ],
   bootstrap: [AppComponent]
 })

@@ -13,6 +13,10 @@ export class StemService {
     return this.http.post<Stem>('https://localhost:44364/api/Stem', stem);
   }
 
+  // addStemmen(GebruikerID: number, stemmen: Stem[]) {
+  //   return this.http.post<Stem>('https://localhost:44364/api/Stem/voegStemmenToe/' + GebruikerID, stemmen);
+  // }
+
   RemoveStem(GebruikerID: number, PollOptieID: number) {
     return this.http.delete<Stem>('https://localhost:44364/api/Stem/DeleteGebruikers/' + GebruikerID + '?pollOptieID=' + PollOptieID);
   }

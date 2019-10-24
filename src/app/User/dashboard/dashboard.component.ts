@@ -73,10 +73,10 @@ export class DashboardComponent implements OnInit {
 
       this.stemService.AddStem(stem).subscribe(result => {
         console.log('TOEGEVOEGD:', result);
-
-        window.location.reload();
-
       });
+      // this.stemService.addStemmen(NieuweStemArray, this.GebruikerID).subscribe(result => {
+      //   console.log(result);
+      // })
     }
 
     this.NieuweStemArray = [];
@@ -86,7 +86,7 @@ export class DashboardComponent implements OnInit {
       this.stemService.RemoveStem(this.GebruikerID, PollOptieID).subscribe(result => {
         console.log('VERWIJDERD:', result);
 
-        window.location.reload();
+        // window.location.reload();
 
       });
     }
@@ -118,5 +118,12 @@ export class DashboardComponent implements OnInit {
       console.log('OudeStemArray', this.OudeStemArray);
     });
 
+  }
+
+  DeletePoll(pollID: number) {
+    this.pollService.deletePoll(pollID).subscribe(result => {
+      console.log(result);
+      this.laadAll();
+    });
   }
 }
