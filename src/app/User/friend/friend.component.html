@@ -41,7 +41,7 @@
 <!-- LISTS INCOMIG_FRENDS REQUESTS -->
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
-       *ngIf="(IncomingRequests | async)?.length != 0">
+                          *ngIf="(IncomingRequests | async)?.length != 0">
     <h3>Incoming</h3>
     <div class="row">
       <div *ngFor="let ontvanger of (IncomingRequests | async)" class="col col-md-6 col-12 mb-3 mt-3">

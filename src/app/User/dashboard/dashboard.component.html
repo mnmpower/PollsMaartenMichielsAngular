@@ -1,1 +1,93 @@
-<p>dashboard works!</p>
+<h1>Dashboard</h1>
+
+
+<!-- Polls waiting at your vote -->
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+       *ngIf="CreatedPolls.length !=0 ">
+    <h3>Edit your polls</h3>
+    <div class="container row">
+      <div class="col col-12 col-md-6 col-lg-6 col-xl-6 mb-3 mt-3" *ngFor="let poll of CreatedPolls">
+        <div class="col-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <span class="fa fa-line-chart">{{poll.naam}}</span>
+                <span class="float-right">
+                  <i class="material-icons md-32">edit</i>
+                  <i class="material-icons md-32">delete_forever</i>
+                </span>
+              </h4>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let optie of poll.pollOpties">
+                  <div class="checkbox">
+                    <label>
+                      {{optie.antwoord}}
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="panel-footer text-center">
+              <button type="button" class="btn btn-dark btn-block btn-sm" (click)=" ViewResults(poll.pollID)">
+                View Result
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Polls finished voting -->
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+       *ngIf="PollsToVote.length !=0 ">
+    <h3>Vote your polls</h3>
+
+    <!-- HIER POLL PLAKKEN -->
+    <div class="container row">
+      <div class="col col-12 col-md-6 col-lg-6 col-xl-6 mb-3 mt-3" *ngFor="let poll of PollsToVote">
+        <div class="col-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4 class="panel-title"><span class="fa fa-line-chart">{{poll.naam}}</span></h4>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+
+                <li class="list-group-item" *ngFor="let optie of poll.pollOpties">
+                  <div class="checkbox" *ngIf="OudeStemArray.includes(optie.pollOptieID)">
+                    <label>
+                      <input type="checkbox" value="{{optie.pollOptieID}}" (change)="RemoveVote(optie.pollOptieID)"
+                             checked="checked"> {{optie.antwoord}}
+                    </label>
+                  </div>
+                  <div class="checkbox" *ngIf="!OudeStemArray.includes(optie.pollOptieID)">
+                    <label>
+                      <input type="checkbox" value="{{optie.pollOptieID}}"
+                             (change)="AddVote(optie.pollOptieID)"> {{optie.antwoord}}
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="panel-footer text-center">
+              <button type="button" class="btn btn-dark btn-block btn-sm" (click)="SubmitVotes()">
+                Vote
+              </button>
+              <a [routerLink]="" class="small" (click)=" ViewResults(poll.pollID)">View Result</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOT HIER POLL -->
+  </div>
+</div>
+

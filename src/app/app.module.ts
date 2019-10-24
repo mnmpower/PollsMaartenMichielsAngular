@@ -26,6 +26,9 @@ import {PollComponent} from './User/poll/poll.component';
 import {FriendComponent} from './User/friend/friend.component';
 import {SettingsComponent} from './User/settings/settings.component';
 import {VriendService} from './Services/vriend.service';
+import {PollService} from './Services/poll.service';
+import {StemService} from './Services/stem.service';
+
 
 const appRoutes: Routes = [
   {path: '', component: WelkomComponent},
@@ -63,6 +66,8 @@ const appRoutes: Routes = [
     Vriend,
     VriendService,
     GebruikerService,
+    PollService,
+    StemService,
     AuthenticationService
   ],
   bootstrap: [AppComponent]

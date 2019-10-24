@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
   checkedValidUsername = false;
   inUse = false;
   SignUpForm: FormGroup;
-  gebruiker: Gebruiker = new Gebruiker(0, '', '', '', '', '', '');
+  gebruiker: Gebruiker = new Gebruiker(0, '', '', '', '', '', '', null, null, null);
 
   // convenience getter for easy access to form fields
   get f() {
@@ -74,7 +74,7 @@ export class SignupComponent implements OnInit {
     console.log(this.gebruiker);
 
 
-    this._gebruikerService.registreer(this.gebruiker).subscribe(result =>{
+    this._gebruikerService.registreer(this.gebruiker).subscribe(result => {
       console.log(result);
     });
 

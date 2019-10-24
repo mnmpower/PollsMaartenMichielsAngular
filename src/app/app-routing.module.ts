@@ -7,6 +7,7 @@ import {DashboardComponent} from './User/dashboard/dashboard.component';
 import {PollComponent} from './User/poll/poll.component';
 import {FriendComponent} from './User/friend/friend.component';
 import {SettingsComponent} from './User/settings/settings.component';
+import {PollresultComponent} from './User/pollresult/pollresult.component';
 import {NeedAuthGuard} from './Authentication/helpers/need-auth-guard';
 
 
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'polls', component: PollComponent },
   { path: 'friends', component: FriendComponent },
-  { path: 'settings', component: SettingsComponent }
+  { path: 'settings', component: SettingsComponent },
+  { path: 'pollResult', component: PollresultComponent }
 ];
 
 @NgModule({
