@@ -26,6 +26,6 @@ export class WelkomComponent implements OnInit {
   }
 
   naarDashboard() {
-    this.router.navigate(['dashboard'], {replaceUrl: true});
+    this.router.navigate(['poll'], {replaceUrl: true});
   }
 }

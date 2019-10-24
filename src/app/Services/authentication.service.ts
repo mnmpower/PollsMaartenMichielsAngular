@@ -13,6 +13,9 @@ export class AuthenticationService {
   public isLoggedin = new BehaviorSubject(false);
 
   constructor(private _httpClient: HttpClient) {
+    if (localStorage.getItem('token') != null){
+      this.isLoggedin.next(true);
+    }
   }
 
   authenticate(login: Login): Observable<Gebruiker> {
