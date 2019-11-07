@@ -27,6 +27,8 @@ export class EditpollComponent implements OnInit {
   newPollOpties: PollOptie[] = [];
   title: string;
 
+  allePO: PollOptie[] =[];
+
   EditPollForm: FormGroup;
   PollOptions: FormArray;
   NewPollOptions: FormArray;
@@ -34,7 +36,10 @@ export class EditpollComponent implements OnInit {
   newOptionAdded = false;
 
 
-  constructor(private _editPollService: EditpollService, private fb: FormBuilder, private _pollService: PollService, private _pollGebruikerService: PollgebruikerService, private gebruikerService: GebruikerService, private pollcreateService: PollcreateService, private router: Router) {
+  editPoll: Poll = new Poll(0, '',[],[]);
+
+  constructor(private _editPollService: EditpollService, private fb: FormBuilder, private _pollService: PollService, private _pollGebruikerService: PollgebruikerService,
+              private router: Router) {
 
     this.laadAll();
 
@@ -117,6 +122,24 @@ export class EditpollComponent implements OnInit {
     console.log(this.NewPollOptions);
     console.log('nieuwe title:');
     console.log(this.title);
+
+    this.editPoll.Naam = this.title;
+    this.editPoll.PollID = this.pollID;
+    for (let PO of this.pollOpties) {
+      this.editPoll.PollOpties.push(PO);
+    }
+
+    for (let PO of this.newPollOpties) {
+      this.editPoll.PollOpties.push(PO);
+    }
+
+    this._pollService.getPollByID(this.pollID).subscribe(result => {
+      this.editPoll.PollGebruikers = result.PollGebruikers;
+      this._pollService.updatePoll(this.pollID, this.editPoll).subscribe(r => {
+        console.log(r);
+      });
+    });
+
   }
 
   // Hier extra geplaatst
@@ -140,20 +163,15 @@ export class EditpollComponent implements OnInit {
       antwoord: ''
     });
   }
-  createNewPollOption(): FormGroup {
-    return this.fb.group({
-      antwoord: ''
-    });
-  }
 
   RemoveExistingOptionHTML(index: number) {
     this.pollOpties.splice(index, 1);
     console.log(index);
   }
 
-  // RemoveNewExistingOptionHTML(index: number) {
-  //   this.newPollOpties.splice(index, 1);
-  //   console.log(index);
-  // }
+  RemoveNewExistingOptionHTML(index: number) {
+    this.newPollOpties.splice(index, 1);
+    console.log(index);
+  }
 
 }
