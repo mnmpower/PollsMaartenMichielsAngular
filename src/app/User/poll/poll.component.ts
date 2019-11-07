@@ -117,8 +117,6 @@ export class PollComponent implements OnInit {
         console.log( this.GeselecteerdeAdmins);
       }
     }
-
-
   }
 
 

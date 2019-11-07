@@ -6,6 +6,7 @@ import {VriendService} from '../Services/vriend.service';
 import { AddFriendComponent } from './friend/add-friend/add-friend.component';
 import { PollresultComponent } from './poll/pollresult/pollresult.component';
 import { EditpollComponent } from './poll/editpoll/editpoll.component';
+import {PolloptionService} from '../Services/polloption.service';
 
 @NgModule({
   declarations: [
