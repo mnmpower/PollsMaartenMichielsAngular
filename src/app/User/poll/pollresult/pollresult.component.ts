@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import CanvasJS from '../../canvasjs-2.3.2/canvasjs.min.js';
-import {Pollresult} from '../../ViewModels/pollresult.viewModel';
-import {PollService} from '../../Services/poll.service';
-import {Poll} from '../../Models/poll.model';
+import CanvasJS from '../../../canvasjs-2.3.2/canvasjs.min.js';
+import {Pollresult} from '../../../ViewModels/pollresult.viewModel';
+import {PollService} from '../../../Services/poll.service';
+import {Poll} from '../../../Models/poll.model';
 
 @Component({
   selector: 'app-pollresult',

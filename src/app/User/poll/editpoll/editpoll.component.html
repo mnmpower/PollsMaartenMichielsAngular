@@ -1,0 +1,123 @@
+<h1>Edit your poll</h1>
+<form [formGroup]="EditPollForm" (ngSubmit)="onSubmit()" data-toggle="validator">
+
+  <!-- LAST NAME INPUT FORM CONTROL -->
+  <div class="form-group">
+    <label for="inputTitle" class="pt-3">Title</label>
+    <input type="text" class="form-control" id="inputTitle" placeholder="Title"
+           formControlName="inputTitle" [ngClass]="{ 'is-invalid': submitted && f.inputTitle.errors }"
+           [(ngModel)]="title">
+    <div *ngIf="submitted && f.inputTitle.errors" class="invalid-feedback">
+      <div *ngIf="f.inputTitle.errors.required">Title is required, please fill in a title for your poll!</div>
+    </div>
+  </div>
+
+  <!-- OPTIONS INPUT FORM CONTROL -->
+  <h3 class="mb-3">Existing options</h3>
+  <div id="pollOptions">
+    <!-- OUDE OPTIENS? READ ONLY + DELETE -->
+    <div class="form-group" formArrayName="PollOptions"
+         *ngFor="let polloption of pollOpties; let i = index">
+      <div>
+        <label for="inputOption{{i}}" class="pt-3">Option {{i + 1}}</label>
+        <div class="input-group ">
+          <input type="text" class="form-control" id="inputOption{{i}}" placeholder="option_placeholder{{i}}"
+                 value="{{polloption.antwoord}}"
+                 formControlName="antwoord{{i}}" readonly>
+
+          <div class="input-group-append">
+            <!-- CHECK BUTTON USERNAME -->
+            <button type="button" class="btn btn-secondary input-group-text" (click)="RemoveExistingOptionHTML(i)"><i
+              class="material-icons md-dark md-24">
+              cancel
+            </i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- NEW OPTIONS ADD+DELETE -->
+    <h3 class="mt-2 mb-2" *ngIf="newOptionAdded">New options</h3>
+    <div class="form-group" formArrayName="NewPollOptions"
+         *ngFor="let polloption of newPollOpties; let i = index">
+      <div [formGroupName]="i">
+        <label for="newInputOption{{i}}" class="pt-3">Option {{i + 1}}</label>
+        <div class="input-group ">
+          <input type="text" class="form-control" id="newInputOption{{i}}" placeholder="Add a new option"
+                 formControlName="antwoord" [(ngModel)]="newPollOpties[i].antwoord">
+
+          <div class="input-group-append">
+            <!-- CHECK BUTTON USERNAME -->
+            <button type="button" class="btn btn-secondary input-group-text" (click)="RemoveNewExistingOptionHTML(i)">
+              <i
+                class="material-icons md-dark md-24">
+                cancel
+              </i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- button for adding options -->
+    <button type="Button" class="btn btn-secondary" (click)="AddNewOption()">
+      <i class="material-icons md-24 pb-0-5 ">add</i>Add option
+    </button>
+  </div>
+
+  <h3 class="mt-3 mb-3">Add voters</h3>
+  <!-- SEARCH FORM ADDING FRIENDS -->
+  <div>
+    <div class="form-group">
+      <label for="inputSearchFriend" class="">Search in friends</label>
+      <div class="input-group ">
+        <input type="text" class="form-control" id="inputSearchFriend" placeholder="Username" (change)="SearchFriends()"
+               formControlName="inputSearchFriend">
+        <div class="input-group-append">
+          <!-- SEARCH BUTTON USERNAME -->
+          <button type="Button" (click)="SearchFriends()" class="btn btn-secondary input-group-text"><i
+            class="material-icons md-dark md-24">
+            search
+          </i></button>
+
+        </div>
+      </div>
+      <small class="form-text text-muted pb-2">Type the username of your friend.</small>
+    </div>
+  </div>
+
+
+  <!-- LISTS ADD FRENDSS -->
+
+  <!--  <div class="row" *ngIf="Zoekstring != ''">-->
+  <!--    <div class="list-group text-center col-12 ml-3  mr-3">-->
+  <!--      <div class="list-group-item list-group-item-action " *ngFor="let gebruiker of GebruikersOpZoekterm"-->
+  <!--           (click)="addVriendToPoll(gebruiker)">-->
+  <!--      <span class="float-left"><i class="material-icons">-->
+  <!--        person_add-->
+  <!--      </i></span>-->
+  <!--        <span>{{gebruiker.gebruikersnaam}}</span>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+
+  <!-- LIST ADDED POLLGEBRUIKERS -->
+  <!--  <div *ngIf="GeselecteerdeVrienden.length != 0">-->
+  <!--    <h3 class="mt-3 mb-3">Currently added</h3>-->
+  <!--    <div class="row">-->
+  <!--      <div *ngFor="let gebruiker of GeselecteerdeVrienden">-->
+  <!--        <div class="list-group text-center col-12 ml-3 mr-2" (click)="RemoveVriendfromPoll(gebruiker)">-->
+  <!--          <div class="list-group-item list-group-item-action ">-->
+  <!--      <span class="float-left"><i class="material-icons">-->
+  <!--        cancel-->
+  <!--      </i></span>-->
+  <!--            <span>{{gebruiker.gebruikersnaam}}</span>-->
+  <!--          </div>-->
+  <!--        </div>-->
+
+
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <button type="submit" class="btn btn-primary mt-3 ">Submit</button>
+</form>

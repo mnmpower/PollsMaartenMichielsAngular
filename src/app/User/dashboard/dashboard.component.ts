@@ -126,4 +126,10 @@ export class DashboardComponent implements OnInit {
       this.laadAll();
     });
   }
+
+  EditPoll(PollID: number) {
+    sessionStorage.setItem('PollID', String(PollID));
+    console.log('storageSet');
+    this.router.navigate(['editPoll'], {replaceUrl: true});
+  }
 }

@@ -4,12 +4,14 @@ import {SharedModule} from '../Shared/shared.module';
 import {GebruikerService} from '../Services/gebruiker.service';
 import {VriendService} from '../Services/vriend.service';
 import { AddFriendComponent } from './friend/add-friend/add-friend.component';
-import { PollresultComponent } from './pollresult/pollresult.component';
+import { PollresultComponent } from './poll/pollresult/pollresult.component';
+import { EditpollComponent } from './poll/editpoll/editpoll.component';
 
 @NgModule({
   declarations: [
     AddFriendComponent,
-    PollresultComponent
+    PollresultComponent,
+    EditpollComponent
   ],
   imports: [
     CommonModule,

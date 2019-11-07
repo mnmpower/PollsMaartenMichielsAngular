@@ -2,11 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormArray} from '@angular/forms';
 import {Poll} from '../../Models/poll.model';
 import {PollService} from '../../Services/poll.service';
-import {PollOptie} from '../../Models/poll-optie.model';
 import {PollgebruikerService} from '../../Services/pollgebruiker.service';
 import {PollGebruiker} from '../../Models/poll-gebruiker.model';
-import {Observable, of} from 'rxjs';
-import {Vriend} from '../../Models/vriend.model';
 import {Gebruiker} from '../../Models/gebruiker.model';
 import {GebruikerService} from '../../Services/gebruiker.service';
 import {PollcreateService} from '../../Services/pollcreate.service';
@@ -31,6 +28,7 @@ export class PollComponent implements OnInit {
   Pollcreate: Pollcreate;
   AlleVrienden: Gebruiker[];
   GeselecteerdeVrienden: Gebruiker[] = [];
+  GeselecteerdeAdmins: Gebruiker[] = [];
   GebruikersOpZoekterm: Gebruiker[];
 
   // TOT HIER VOOR VM
@@ -39,7 +37,7 @@ export class PollComponent implements OnInit {
   PollOptions: FormArray;
 
   pollGebruiker = new PollGebruiker(0, 0, 0, false, null, null);
-
+  maakAdmin = false;
   newPoll: Poll = new Poll(0, '', null, null);
 
   Zoekstring = '';
@@ -106,18 +104,40 @@ export class PollComponent implements OnInit {
   }
 
   addVriendToPoll(gebruiker: Gebruiker) {
-    if (!this.GeselecteerdeVrienden.includes(gebruiker)) {
-      this.GeselecteerdeVrienden.push(gebruiker);
-      console.log(this.GeselecteerdeVrienden);
+    if (!this.maakAdmin) {
+      if (!this.GeselecteerdeVrienden.includes(gebruiker) && !this.GeselecteerdeAdmins.includes(gebruiker)) {
+        this.GeselecteerdeVrienden.push(gebruiker);
+        console.log('gebruikers');
+        console.log(this.GeselecteerdeVrienden);
+      }
+    } else {
+      if (!this.GeselecteerdeAdmins.includes(gebruiker) && !this.GeselecteerdeVrienden.includes(gebruiker)) {
+        this.GeselecteerdeAdmins.push(gebruiker);
+        console.log('admins');
+        console.log( this.GeselecteerdeAdmins);
+      }
     }
+
 
   }
 
 
   RemoveVriendfromPoll(gebruiker: Gebruiker) {
     let index = this.GeselecteerdeVrienden.indexOf(gebruiker);
-    console.log(index);
-    this.GeselecteerdeVrienden.splice(index, 1);
+    if (index != -1) {
+      console.log(index);
+      this.GeselecteerdeVrienden.splice(index, 1);
+      console.log('gebruikers');
+      console.log(this.GeselecteerdeVrienden);
+    } else {
+      index = this.GeselecteerdeAdmins.indexOf(gebruiker);
+      if (index != -1) {
+        console.log(index);
+        this.GeselecteerdeAdmins.splice(index, 1);
+        console.log('admins');
+        console.log( this.GeselecteerdeAdmins);
+      }
+    }
   }
 
   onSubmit() {
@@ -151,6 +171,7 @@ export class PollComponent implements OnInit {
       this.pollGebruiker.gebruikerID = this.GebruikerID;
       this._pollGebruikerService.AddPollGebruiker(this.pollGebruiker).subscribe(resul => {
         this.AddAllePollGebruikers(resul.pollID, this.GeselecteerdeVrienden);
+        this.AddAllePollGebruikerAdmins(resul.pollID, this.GeselecteerdeAdmins);
         this.router.navigate(['dashboard'], {replaceUrl: true});
       });
     });
@@ -176,6 +197,33 @@ export class PollComponent implements OnInit {
       console.log('11 einde for loop');
     }
     console.log('12 einde functie');
+  }
+
+  AddAllePollGebruikerAdmins(pollID: number, GeselecteerdeAdmins: Gebruiker[]) {
+    console.log('PollID: ', pollID);
+    console.log('13 in toevoegen admins');
+    for (let gebruiker of GeselecteerdeAdmins) {
+      console.log('gebruiker: ', gebruiker);
+      console.log('GeselecteerdeAdmins: ', GeselecteerdeAdmins);
+      console.log('14 in forloop admins');
+      var PG: PollGebruiker = new PollGebruiker(0, pollID, gebruiker.gebruikerID, true, null, null);
+
+      // this.pollGebruiker.GebruikerID = gebruiker.gebruikerID;
+      // console.log('gebruikerID SET: ', gebruiker.gebruikerID);
+      // this.pollGebruiker.PollID = pollID;
+      // this.pollGebruiker.beheerder = false;
+      console.log('PG:', PG);
+      this._pollGebruikerService.AddPollGebruiker(PG).subscribe(result => {
+        console.log('15 eindelijk', result);
+      });
+      console.log('16 einde for loop');
+    }
+    console.log('17 einde functie');
+  }
+
+  ChangeAdmin() {
+    this.maakAdmin = !this.maakAdmin;
+    console.log(this.maakAdmin);
   }
 }
 

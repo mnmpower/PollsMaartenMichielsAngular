@@ -30,6 +30,7 @@ import {PollService} from './Services/poll.service';
 import {StemService} from './Services/stem.service';
 import {PollgebruikerService} from './Services/pollgebruiker.service';
 import {PollcreateService} from './Services/pollcreate.service';
+import {EditpollService} from './Services/editpoll.service';
 
 
 const appRoutes: Routes = [
@@ -72,7 +73,8 @@ const appRoutes: Routes = [
     StemService,
     AuthenticationService,
     PollgebruikerService,
-    PollcreateService
+    PollcreateService,
+    EditpollService
   ],
   bootstrap: [AppComponent]
 })

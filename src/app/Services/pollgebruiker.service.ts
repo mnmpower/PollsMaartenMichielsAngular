@@ -12,17 +12,4 @@ export class PollgebruikerService {
   AddPollGebruiker(pollGebruiker: PollGebruiker) {
     return this.http.post<PollGebruiker>('https://localhost:44364/api/PollGebruiker', pollGebruiker);
   }
-
-  // nog aanpassen
-  // addStemmen(PollID: number, stemmen: PollGebruiker[]) {
-  //   return this.http.post<>('https://localhost:44364/api/Stem/voegStemmenToe/' + PollID, stemmen);
-  // }
-  //
-  // RemoveStem(GebruikerID: number, PollOptieID: number) {
-  //   return this.http.delete<PollGebruiker>('https://localhost:44364/api/Stem/DeleteGebruikers/' + GebruikerID + '?pollOptieID=' + PollOptieID);
-  // }
-
-  AddPollGebruikers(PollID: number, GeselecteerdeVrienden: Gebruiker[]) {
-    return this.http.post<PollGebruiker>('https://localhost:44364/api/PollGebruiker/AddPollGebruikers/', +PollID, GeselecteerdeVrienden);
-  }
 }

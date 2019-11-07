@@ -24,7 +24,7 @@
           <!--                 formControlName="antwoord" [ngClass]="{ 'is-invalid': submitted && f.inputOption.errors }">-->
 
           <div class="input-group-append">
-            <!-- CHECK BUTTON USERNAME -->
+            <!-- DELETE OPTION BUTTON -->
             <button type="button" class="btn btn-secondary input-group-text" (click)="RemoveOptionHTML(i)"><i
               class="material-icons md-dark md-24">
               cancel
@@ -61,6 +61,9 @@
         </div>
       </div>
       <small class="form-text text-muted pb-2">Type the username of your friend.</small>
+
+      <input type="checkbox" value="true"
+             (change)="ChangeAdmin()"> Make admin.
     </div>
   </div>
 
@@ -79,10 +82,28 @@
     </div>
   </div>
 
+  <!-- LIST ADDED ADMIN POLLGEBRUIKERS -->
+  <div *ngIf="GeselecteerdeAdmins.length != 0">
+    <h3 class="mt-3 mb-3">Admins</h3>
+    <div class="row">
+      <div *ngFor="let gebruiker of GeselecteerdeAdmins">
+        <div class="list-group text-center col-12 ml-3 mr-2" (click)="RemoveVriendfromPoll(gebruiker)">
+          <div class="list-group-item list-group-item-action list list-group-item-primary">
+      <span class="float-left"><i class="material-icons">
+        cancel
+      </i></span>
+            <span>{{gebruiker.gebruikersnaam}}</span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
 
   <!-- LIST ADDED POLLGEBRUIKERS -->
   <div *ngIf="GeselecteerdeVrienden.length != 0">
-    <h3 class="mt-3 mb-3">Currently added</h3>
+    <h3 class="mt-3 mb-3">Friends</h3>
     <div class="row">
       <div *ngFor="let gebruiker of GeselecteerdeVrienden">
         <div class="list-group text-center col-12 ml-3 mr-2" (click)="RemoveVriendfromPoll(gebruiker)">
@@ -93,8 +114,6 @@
             <span>{{gebruiker.gebruikersnaam}}</span>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>
