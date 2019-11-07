@@ -223,5 +223,9 @@ export class PollComponent implements OnInit {
     this.maakAdmin = !this.maakAdmin;
     console.log(this.maakAdmin);
   }
+
+  toDashboard(){
+    this.router.navigate(['dashboard'], {replaceUrl: true});
+  }
 }
 

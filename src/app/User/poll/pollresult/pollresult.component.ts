@@ -3,6 +3,7 @@ import CanvasJS from '../../../canvasjs-2.3.2/canvasjs.min.js';
 import {Pollresult} from '../../../ViewModels/pollresult.viewModel';
 import {PollService} from '../../../Services/poll.service';
 import {Poll} from '../../../Models/poll.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-pollresult',
@@ -18,9 +19,8 @@ export class PollresultComponent implements OnInit {
   dataArray = [];
   Title: string;
 
-  constructor(private pollService: PollService) {
+  constructor(private pollService: PollService, private router: Router) {
     this.PollID = parseInt(sessionStorage.getItem('PollID'));
-    sessionStorage.removeItem('PollID');
     this.LaadPoll();
   }
 
@@ -58,6 +58,10 @@ export class PollresultComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  toDashboard(){
+    this.router.navigate(['dashboard'], {replaceUrl: true});
   }
 }
 

@@ -5,6 +5,7 @@ import {Vriend} from '../../Models/vriend.model';
 import {VriendService} from '../../Services/vriend.service';
 import {GebruikerService} from '../../Services/gebruiker.service';
 import {Gebruiker} from '../../Models/gebruiker.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-friend',
@@ -25,7 +26,7 @@ export class FriendComponent implements OnInit {
   ToonAddIcon: Observable<boolean>;
 
 
-  constructor(private fb: FormBuilder, private vriendService: VriendService, private gebruikerService: GebruikerService) {
+  constructor(private fb: FormBuilder, private vriendService: VriendService, private gebruikerService: GebruikerService, private router: Router) {
     this.laadAll();
 
   }
@@ -105,6 +106,10 @@ export class FriendComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  toDashboard(){
+    this.router.navigate(['dashboard'], {replaceUrl: true});
   }
 
 }
