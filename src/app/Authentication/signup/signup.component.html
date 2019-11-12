@@ -28,7 +28,7 @@
     <label for="inputGebruikersnaam" class="">Username</label>
     <div class="input-group ">
       <input type="text" class="form-control" id="inputGebruikersnaam" placeholder="Username"
-             formControlName="inputGebruikersnaam" [ngClass]="{ 'is-invalid': submitted && f.inputGebruikersnaam.errors }">
+             formControlName="inputGebruikersnaam" [ngClass]="{ 'is-invalid': submitted && f.inputGebruikersnaam.errors }" (ngModelChange)="checkUsername()">
       <div class="input-group-append">
         <!-- CHECK BUTTON USERNAME -->
         <button type="button" class="btn btn-secondary input-group-text" (click)="checkUsername()">Check</button>

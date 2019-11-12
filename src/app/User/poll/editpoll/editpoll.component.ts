@@ -358,5 +358,8 @@ export class EditpollComponent implements OnInit {
 
   }
 
+  toDashboard(){
+    this.router.navigate(['dashboard'], {replaceUrl: true});
+  }
 
 }

@@ -32,4 +32,8 @@ export class GebruikerService {
   deleteGebruiker(gebruikerID: number) {
     return this.http.delete<Gebruiker>('https://localhost:44364/api/Gebruiker/' + gebruikerID);
   }
+
+  checkUsernaam(usernaam: string) {
+    return this.http.get<boolean>('https://localhost:44364/api/Gebruiker/checkUsername/' + usernaam);
+  }
 }

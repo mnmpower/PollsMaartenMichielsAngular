@@ -6,6 +6,7 @@ import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MustMatch} from '../helpers/must-match.validator';
 import {Gebruiker} from '../../Models/gebruiker.model';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +22,7 @@ export class SignupComponent implements OnInit {
 
   submitted = false;
   checkedValidUsername = false;
-  inUse = false;
+  inUse: boolean = false;
   SignUpForm: FormGroup;
   gebruiker: Gebruiker = new Gebruiker(0, '', '', '', '', '', '', null, null, null);
 
@@ -47,15 +48,33 @@ export class SignupComponent implements OnInit {
 
   checkUsername() {
     // AANPASSEN DAT HIJ VIA API KIJKE OF USERNAME VRIJ IS
+    this._gebruikerService.checkUsernaam(this.SignUpForm.get(['inputGebruikersnaam']).value).subscribe(
+      r => {
+        this.inUse = r.valueOf();
+
+        if (this.inUse == false) {
+          this.SignUpForm.controls.inputGebruikersnaam.setErrors(null);
+          console.log('set false');
+          this.checkedValidUsername = true;
+        } else {
+
+          console.log('set true');
+          this.checkedValidUsername = false;
+          this.SignUpForm.controls.inputGebruikersnaam.setErrors({inUse: true});
+
+        }
+      });
+
+
     // if (false) {
-    //   this.SingUpForm.controls.inputGebruikersnaam.setErrors({inUse: true});
+
     //   this.checkedValidUsername = false;
     // } else {
-    //   this.SingUpForm.controls.inputGebruikersnaam.setErrors(null);
-    this.checkedValidUsername = true;
+    //
+
     // }
     // return true;
-    this.inUse = !this.inUse;
+    // this.inUse = !this.inUse;
   }
 
   onSubmit() {
