@@ -1,14 +1,111 @@
-<div class="container-fluid text-center pb-5">
+<script>
+    $_('#carouselExampleIndicators').carousel()
+</script>
+
+<div class="container-fluid text-center pb-5 py-2">
   <div style="text-align:center">
     <h1>Welcome to {{title}}!</h1>
-    <h2>{{auteur}}</h2>
-    <p>INVOEGEN VAN SCREENS VAN DE APPLICATIE + INFO</p>
-    <p *ngIf="isLoggedIn">Show this only if "isLoggedIn" is true
-      <i class="material-icons">
-        account_circle
-      </i>
-    </p>
-    <button (click)="naarDashboard()" >CHEATBUTTON</button>
+    <h2>Created by {{auteur}}</h2>
+    <div>
+      After you have signed up and logged in, you get acces to the application. In this application you can make polls,
+      invite your friends to those polls and check out on the results of those polls. Down below you can find some
+      screenshots of what you can expect after you are logged in.
+    </div>
+    <br>
+    <h4>This is how a poll might look like.</h4>
+    <img src="../../../assets/images/PollResult.PNG" class="img-fluid"/>
+
+
+    <h4>you might even search for your friends.</h4>
+    <img src="../../../assets/images/SearchingFriends.PNG" class="img-fluid"/>
+    <!-- timeline item 1 -->
+    <div class="row no-gutters">
+
+
+      <div class="col-sm"> <!--spacer--> </div>
+      <!-- timeline item 1 center dot -->
+      <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+        <div class="row h-50">
+
+          <div class="col">&nbsp;
+
+          </div>
+          <div class="col">&nbsp;</div>
+        </div>
+        <h5 class="m-2">
+          <span class="badge badge-pill bg-light border">&nbsp;</span>
+        </h5>
+        <div class="row h-50">
+          <div class="col border-right">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+        </div>
+      </div>
+      <!-- timeline item 1 event content -->
+      <div class="col-sm py-2">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title text-muted">Incoming friend requests</h4>
+            <p class="card-text"><img src="../../../assets/images/IncomingFriendRequest.PNG" class="img-fluid"/></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- timeline item 2 -->
+    <div class="row no-gutters">
+      <div class="col-sm py-2">
+        <div class="card border-success shadow">
+          <div class="card-body">
+            <h4 class="card-title text-success">Outgooing friend requests</h4>
+            <p class="card-text"><img src="../../../assets/images/OutgooingFriendRequest.PNG" class="img-fluid"/></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+        <div class="row h-50">
+          <div class="col border-right">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+        </div>
+        <h5 class="m-2">
+          <span class="badge badge-pill bg-success">&nbsp;</span>
+        </h5>
+        <div class="row h-50">
+          <div class="col border-right">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+        </div>
+      </div>
+      <div class="col-sm"> <!--spacer--> </div>
+    </div>
+    <!--/row-->
+    <!-- timeline item 3 -->
+    <div class="row no-gutters">
+      <div class="col-sm"> <!--spacer--> </div>
+      <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+        <div class="row h-50">
+          <div class="col border-right">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+        </div>
+        <h5 class="m-2">
+          <span class="badge badge-pill bg-light border">&nbsp;</span>
+        </h5>
+        <div class="row h-50">
+          <div class="col border-right">&nbsp;</div>
+          <div class="col">&nbsp;</div>
+        </div>
+      </div>
+      <div class="col-sm py-2">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Friend list</h4>
+            <p><img src="../../../assets/images/FriendList.PNG" class="img-fluid"/></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <h4>Or you just have to answer on the polls...</h4>
+    <div >
+      <img src="../../../assets/images/DashboardVote.PNG"  class="img-fluid">
+    </div>
 
 
   </div>

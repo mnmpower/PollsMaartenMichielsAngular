@@ -25,7 +25,4 @@ export class WelkomComponent implements OnInit {
   ngOnInit() {
   }
 
-  naarDashboard() {
-    this.router.navigate(['polls'], {replaceUrl: true});
-  }
 }
