@@ -17,13 +17,12 @@ const routes: Routes = [
   { path: 'signUp', component: SignupComponent },
   { path: 'logIn', component: LoginComponent },
   // authenticatien toevoegen bij alle onderstaande!!!
-  // { path: 'dashboard', component: DashboardComponent, canActivate: [NeedAuthGuard] },
-  { path: 'dashboard', component: DashboardComponent},
-  { path: 'polls', component: PollComponent },
-  { path: 'friends', component: FriendComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'pollResult', component: PollresultComponent },
-  { path: 'editPoll', component: EditpollComponent }
+  { path: 'dashboard', component: DashboardComponent, canActivate: [NeedAuthGuard] },
+  { path: 'polls', component: PollComponent, canActivate: [NeedAuthGuard] },
+  { path: 'friends', component: FriendComponent, canActivate: [NeedAuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [NeedAuthGuard] },
+  { path: 'pollResult', component: PollresultComponent, canActivate: [NeedAuthGuard] },
+  { path: 'editPoll', component: EditpollComponent, canActivate: [NeedAuthGuard] }
 ];
 
 @NgModule({
