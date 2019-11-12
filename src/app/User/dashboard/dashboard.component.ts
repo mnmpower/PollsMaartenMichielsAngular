@@ -108,6 +108,13 @@ export class DashboardComponent implements OnInit {
       this.Dashboard = result;
       this.PollsToVote = this.Dashboard.uitgenodigdePolls;
       this.CreatedPolls = this.Dashboard.beheerderPolls;
+      // EXTRA
+      for (let poll of this.CreatedPolls) {
+        poll.kortenaam = poll.naam.substr(0, 15) + "...";
+
+        console.log('poll.kortenaam', poll.kortenaam);
+      }
+      //EINDE EXTRA
       for (let stem of this.Dashboard.uitgebrachteStemmen) {
         this.OudeStemArray.push(stem.pollOptieID);
 

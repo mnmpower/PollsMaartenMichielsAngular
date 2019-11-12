@@ -31,6 +31,7 @@ export class FriendComponent implements OnInit {
 
   }
 
+  // deze dingen teovegeon in het vieuwemodel.
   laadAll() {
     this.laadIncomingRequest(this.GebruikerID);
     this.laadOutgoingRequest(this.GebruikerID);
