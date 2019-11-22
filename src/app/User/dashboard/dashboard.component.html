@@ -4,6 +4,12 @@
 <!-- Polls waiting at your vote -->
 <div class="row">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+       *ngIf="CreatedPolls.length == 0 && PollsToVote.length ==0 ">
+    No polls running! Create your own poll by clicking on the poll icon in the navigation bar.
+  </div>
+
+
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
        *ngIf="CreatedPolls.length !=0 ">
     <h3>Edit your polls</h3>
     <div class="container row">
